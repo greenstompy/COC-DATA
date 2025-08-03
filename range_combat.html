@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>近接戦闘武器データベース</title>
+    <title>射撃武器データベース</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -12,7 +12,6 @@
             --secondary-color: #34495e;
             --accent-color: #e74c3c;
             --success-color: #27ae60;
-            --melee-color: #8e44ad;
         }
         
         body {
@@ -100,8 +99,8 @@
             color: var(--accent-color);
         }
         
-        .skill-cell {
-            color: var(--melee-color);
+        .range-cell {
+            color: var(--success-color);
             font-weight: 600;
         }
         
@@ -152,8 +151,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="fas fa-sword me-2"></i>
-                近接戦闘武器データベース
+                <i class="fas fa-crosshairs me-2"></i>
+                武器データベース
             </a>
         </div>
     </nav>
@@ -163,432 +162,39 @@
             <!-- ナビゲーション -->
             <ul class="nav nav-pills nav-fill mb-4" id="weaponTabs">
                 <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="pill" href="#brawling">
-                        <i class="fas fa-fist-raised weapon-icon"></i>格闘
+                    <a class="nav-link active" data-bs-toggle="pill" href="#pistols">
+                        <i class="fas fa-gun weapon-icon"></i>拳銃
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#swords">
-                        <i class="fas fa-sword weapon-icon"></i>刀剣
+                    <a class="nav-link" data-bs-toggle="pill" href="#rifles">
+                        <i class="fas fa-crosshairs weapon-icon"></i>ライフル
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#spears">
-                        <i class="fas fa-long-arrow-alt-right weapon-icon"></i>槍
+                    <a class="nav-link" data-bs-toggle="pill" href="#shotguns">
+                        <i class="fas fa-meteor weapon-icon"></i>ショットガン
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#axes">
-                        <i class="fas fa-axe weapon-icon"></i>斧
+                    <a class="nav-link" data-bs-toggle="pill" href="#smg">
+                        <i class="fas fa-spray-can weapon-icon"></i>SMG
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#other">
-                        <i class="fas fa-tools weapon-icon"></i>その他
+                    <a class="nav-link" data-bs-toggle="pill" href="#heavy">
+                        <i class="fas fa-bomb weapon-icon"></i>重火器
                     </a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <!-- 格闘タブ -->
-                <div class="tab-pane fade show active" id="brawling">
+                <!-- 拳銃タブ -->
+                <div class="tab-pane fade show active" id="pistols">
                     <div class="weapon-category">
-                        <h1><i class="fas fa-fist-raised me-3"></i>近接格闘（格闘）25％</h1>
+                        <h1><i class="fas fa-gun me-3"></i>射撃（拳銃）20％</h1>
                         <div class="skill-info">
-                            <p class="mb-0">全ての素手の戦闘と、誰でも手に取って役に立てるような基本的な武器。これは棍棒、手斧、ナイフ、瓶などの多くの即席の武器を含む。</p>
-                        </div>
-
-                        <h2>杖</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>大きいこん棒</strong></td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>小さいこん棒</strong></td>
-                                            <td class="damage-cell">1d6+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>タクティカルバトン</strong></td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>仕込み杖</strong></td>
-                                            <td class="damage-cell">1d6+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>燃えているたいまつ</strong></td>
-                                            <td class="damage-cell">1d6+炎上</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>ブラックジャック</strong></td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>4</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>ナイフ</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>ブラスナックル</strong></td>
-                                            <td class="damage-cell">1d3+1+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>9</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>小型ナイフ</strong></td>
-                                            <td class="damage-cell">1d4+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>9</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>中型ナイフ</strong></td>
-                                            <td class="damage-cell">1d4+2+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>大型ナイフ</strong></td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>その他</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>電気の通じた導線（100V）</strong></td>
-                                            <td class="damage-cell">1d8+スタン</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>6</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>電気の通じた導線（200V）</strong></td>
-                                            <td class="damage-cell">2d8+スタン</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>6</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>スタンガン</strong></td>
-                                            <td class="damage-cell">1d3+スタン</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>7</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>催涙スプレー</strong></td>
-                                            <td class="damage-cell">スタン</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>7</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 刀剣タブ -->
-                <div class="tab-pane fade" id="swords">
-                    <div class="weapon-category">
-                        <h1><i class="fas fa-sword me-3"></i>近接格闘（刀剣）20％</h1>
-                        <div class="skill-info">
-                            <p class="mb-0">刃渡り60㎝以上の全ての刃物</p>
-                        </div>
-                        
-                        <h2>刀剣</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>基本命中率</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>軽い刀剣</strong></td>
-                                            <td class="skill-cell">20%</td>
-                                            <td class="damage-cell">1d6+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>刀剣</strong></td>
-                                            <td class="skill-cell">20%</td>
-                                            <td class="damage-cell">1d6+1+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>重い刀剣</strong></td>
-                                            <td class="skill-cell">20%</td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>レイピア</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>基本命中率</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>フェンシングフォイル</strong></td>
-                                            <td class="skill-cell">20%</td>
-                                            <td class="damage-cell">1d6+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>レイピア</strong></td>
-                                            <td class="skill-cell">20%</td>
-                                            <td class="damage-cell">1d6+1+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>騎兵用サーベル</strong></td>
-                                            <td class="skill-cell">20%</td>
-                                            <td class="damage-cell">1d8+1+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>日本刀</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>基本命中率</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>日本刀</strong></td>
-                                            <td class="skill-cell">15%</td>
-                                            <td class="damage-cell">1d10+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>脇差</strong></td>
-                                            <td class="skill-cell">15%</td>
-                                            <td class="damage-cell">1d6+1+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>竹刀</strong></td>
-                                            <td class="skill-cell">15%</td>
-                                            <td class="damage-cell">スタン+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>2</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>太刀</strong></td>
-                                            <td class="skill-cell">15%</td>
-                                            <td class="damage-cell">2d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>30</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>青龍刀</h2>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>青龍刀</strong></td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>青龍大刀</strong></td>
-                                            <td class="damage-cell">2d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>30</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 槍タブ -->
-                <div class="tab-pane fade" id="spears">
-                    <div class="weapon-category">
-                        <h1><i class="fas fa-long-arrow-alt-right me-3"></i>近接格闘（槍）20％</h1>
-                        <div class="skill-info">
-                            <p class="mb-0">槍、ランス。投げる場合は投擲を使用する</p>
-                        </div>
-                        
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>基本命中率</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>槍</strong></td>
-                                            <td class="skill-cell">15%</td>
-                                            <td class="damage-cell">1d10+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>銃剣</strong></td>
-                                            <td class="skill-cell">15%</td>
-                                            <td class="damage-cell">1d6+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>12</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 斧タブ -->
-                <div class="tab-pane fade" id="axes">
-                    <div class="weapon-category">
-                        <h1><i class="fas fa-axe me-3"></i>近接格闘（斧）15％</h1>
-                        <div class="skill-info">
-                            <p class="mb-0">斧、手斧、鎌などの切断武器</p>
+                            <p class="mb-0">全ての拳銃に類する武器を一発ずつ撃つ場合に使用する。現代のマシンピストルを連射する場合には射撃（サブマシンガン）を使用する。</p>
                         </div>
                         
                         <div class="table-container">
@@ -600,167 +206,899 @@
                                             <th>ダメージ</th>
                                             <th>基本射程</th>
                                             <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
                                             <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                            <th>弾薬</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><strong>木斧</strong></td>
-                                            <td class="damage-cell">1d8+2+db</td>
-                                            <td class="skill-cell">タッチ</td>
+                                            <td><strong>フリントロック式拳銃</strong></td>
+                                            <td class="damage-cell">1d6+1</td>
+                                            <td class="range-cell">10</td>
+                                            <td>1/4</td>
                                             <td>1</td>
-                                            <td>15</td>
+                                            <td>8</td>
+                                            <td>95</td>
+                                            <td>様々</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>手斧、鎌</strong></td>
-                                            <td class="damage-cell">1d6+1+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>12</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- その他タブ -->
-                <div class="tab-pane fade" id="other">
-                    <div class="weapon-category">
-                        <h1><i class="fas fa-tools me-3"></i>その他の近接武器</h1>
-                        
-                        <h2>近接格闘（フレイル）10％</h2>
-                        <div class="skill-info">
-                            <p class="mb-0">フレイル、鎖鎌、ムチなどの打撃武器</p>
-                        </div>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>双節棍</strong></td>
-                                            <td class="damage-cell">1d8+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>三節棍</strong></td>
-                                            <td class="damage-cell">1d10+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>25</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>モーニングスター</strong></td>
-                                            <td class="damage-cell">1d8+2+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>15</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>近接格闘（絞殺紐）15％</h2>
-                        <div class="skill-info">
-                            <p class="mb-0">首を絞めるために様々な長さの物体が使われる。犠牲者は脱出するために戦闘マヌーバーを行わなければならず、さもなくば1d6のダメージを受ける。</p>
-                        </div>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>絞殺紐</strong></td>
-                                            <td class="damage-cell">1d6+db</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>近接格闘（チェーンソー）10％</h2>
-                        <div class="skill-info">
-                            <p class="mb-0">ガソリンで動く大量生産されたチェーンソーは1927年発。ただし、それより古いタイプのものも存在する。</p>
-                        </div>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>チェーンソー</strong></td>
-                                            <td class="damage-cell">2d8</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <h2>近接格闘（鞭）5％</h2>
-                        <div class="skill-info">
-                            <p class="mb-0">投げ縄および鞭</p>
-                        </div>
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>名前</th>
-                                            <th>ダメージ</th>
-                                            <th>基本射程</th>
-                                            <th>1Rの攻撃回数</th>
-                                            <th>耐久力</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>鞭</strong></td>
-                                            <td class="damage-cell">1d3</td>
-                                            <td class="skill-cell">タッチ</td>
-                                            <td>1</td>
-                                            <td>4</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>鎖鎌</strong></td>
+                                            <td><strong>22口径ショートオートマチック</strong></td>
                                             <td class="damage-cell">1d6</td>
-                                            <td class="skill-cell">タッチ</td>
+                                            <td class="range-cell">10</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>6</td>
+                                            <td>00</td>
+                                            <td>22LR</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>25口径デリンジャー</strong></td>
+                                            <td class="damage-cell">1d6</td>
+                                            <td class="range-cell">3</td>
                                             <td>1</td>
-                                            <td>4</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>00</td>
+                                            <td>25口径</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>32口径（7.65㎜）リボルバー</strong></td>
+                                            <td class="damage-cell">1d8</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>10</td>
+                                            <td>00</td>
+                                            <td>32口径</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>32口径（7.65㎜）オートマチック</strong></td>
+                                            <td class="damage-cell">1d8</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>8</td>
+                                            <td>8</td>
+                                            <td>99</td>
+                                            <td>32オート</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>357口径マグナムリボルバー</strong></td>
+                                            <td class="damage-cell">1d8+1d4</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>11</td>
+                                            <td>00</td>
+                                            <td>357マグナム</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>38口径リボルバー</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>10</td>
+                                            <td>00</td>
+                                            <td>38口径</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>38口径オートマチック</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>8</td>
+                                            <td>8</td>
+                                            <td>99</td>
+                                            <td>38オート</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>41口径リボルバー</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>10</td>
+                                            <td>00</td>
+                                            <td>41口径</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>44口径マグナムリボルバー</strong></td>
+                                            <td class="damage-cell">1d10+1d4+2</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>00</td>
+                                            <td>44マグナム</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>45口径リボルバー</strong></td>
+                                            <td class="damage-cell">1d10+2</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>6</td>
+                                            <td>10</td>
+                                            <td>00</td>
+                                            <td>45口径</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>45口径オートマチック</strong></td>
+                                            <td class="damage-cell">1d10+2</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>99</td>
+                                            <td>45オート</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>IMIデザートイーグル</strong></td>
+                                            <td class="damage-cell">1d10+1d6+3</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3</td>
+                                            <td>7</td>
+                                            <td>9</td>
+                                            <td>94</td>
+                                            <td>44マグナム</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>信号拳銃（フレアガン）</strong></td>
+                                            <td class="damage-cell">1d10+1d3</td>
+                                            <td class="range-cell">10</td>
+                                            <td>1/2</td>
+                                            <td>1</td>
+                                            <td>10</td>
+                                            <td>100</td>
+                                            <td>-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ライフルタブ -->
+                <div class="tab-pane fade" id="rifles">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-crosshairs me-3"></i>射撃（ライフル/ショットガン）25%</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">どんなタイプのライフル銃（レバーアクション、ボルトアクション・セミオートマチックなどに関わらず）やショットガンを撃つことができる。アサルトライフルで一発だけ（または一発ずつ）撃つ時にはこの技能を使用する。</p>
+                        </div>
+                        
+                        <h2>ライフル</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>58口径スプリングフィールド・ライフルマスケット</strong></td>
+                                            <td class="damage-cell">1d10+4</td>
+                                            <td class="range-cell">60</td>
+                                            <td>1/4</td>
+                                            <td>1</td>
+                                            <td>12</td>
+                                            <td>95</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>22口径ボルトアクションライフル</strong></td>
+                                            <td class="damage-cell">1d6+1</td>
+                                            <td class="range-cell">30</td>
+                                            <td>1</td>
+                                            <td>6</td>
+                                            <td>9</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>30口径レバーアクションライフル</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">50</td>
+                                            <td>1</td>
+                                            <td>6</td>
+                                            <td>8</td>
+                                            <td>98</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>45口径マーティニ=ヘンリーライフル</strong></td>
+                                            <td class="damage-cell">1d8+1d6+3</td>
+                                            <td class="range-cell">80</td>
+                                            <td>1/3</td>
+                                            <td>1</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>モラン大佐のエアライフル</strong></td>
+                                            <td class="damage-cell">2d6+1</td>
+                                            <td class="range-cell">20</td>
+                                            <td>1/3</td>
+                                            <td>1</td>
+                                            <td>7</td>
+                                            <td>88</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ガーランドM1,M2ライフル</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1</td>
+                                            <td>8</td>
+                                            <td>11</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>SKSカービン</strong></td>
+                                            <td class="damage-cell">2d6+1</td>
+                                            <td class="range-cell">90</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>10</td>
+                                            <td>97</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>303口径リー=エンフィールド</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1/2</td>
+                                            <td>10</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>30-06口径ボルトアクションライフル</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1/2</td>
+                                            <td>5</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>30-06口径セミオートマチックライフル</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>444口径マーリンライフル</strong></td>
+                                            <td class="damage-cell">2d8+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>12</td>
+                                            <td>98</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>エレファントガン（二連式）</strong></td>
+                                            <td class="damage-cell">3d6+4</td>
+                                            <td class="range-cell">100</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>バレットモデル82</strong></td>
+                                            <td class="damage-cell">2d10+1d8+6</td>
+                                            <td class="range-cell">250</td>
+                                            <td>1</td>
+                                            <td>11</td>
+                                            <td>12</td>
+                                            <td>96</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>アサルトライフル</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">フルオートまたはバーストを使う場合はSMGを使用する。一発ずつ撃つ場合は射撃（ライフル/ショットガン）を使用する。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>AK47あるいはAKM</strong></td>
+                                            <td class="damage-cell">2d6+1</td>
+                                            <td class="range-cell">100</td>
+                                            <td>2またはフル</td>
+                                            <td>30</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>AK74</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">110</td>
+                                            <td>2またはフル</td>
+                                            <td>30</td>
+                                            <td>12</td>
+                                            <td>97</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>FN/FAL</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>2または3点バースト</td>
+                                            <td>20</td>
+                                            <td>11</td>
+                                            <td>97</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ガリルAR</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1またはフル</td>
+                                            <td>20</td>
+                                            <td>12</td>
+                                            <td>98</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>M16A2</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">110</td>
+                                            <td>2または3点バースト</td>
+                                            <td>30</td>
+                                            <td>11</td>
+                                            <td>97</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>M4カービン</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">90</td>
+                                            <td>2または3点バースト</td>
+                                            <td>30</td>
+                                            <td>12</td>
+                                            <td>97</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>シュタイヤーAUG</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">90</td>
+                                            <td>2またはフル</td>
+                                            <td>30</td>
+                                            <td>12</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ベレッタM70/90</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">110</td>
+                                            <td>1またはフル</td>
+                                            <td>30</td>
+                                            <td>12</td>
+                                            <td>99</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ショットガンタブ -->
+                <div class="tab-pane fade" id="shotguns">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-meteor me-3"></i>ショットガン</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">ショットガンから発射された散弾は放射状に広がって飛ぶので、命中率は射程によって減少しないが、与えるダメージは減少する。</p>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>20ケージショットガン（二連式）</strong></td>
+                                            <td class="damage-cell">2d6/1d6/1d3</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>16ケージショットガン（二連式）</strong></td>
+                                            <td class="damage-cell">2d6+2/1d6+1/1d4</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>12ケージショットガン（二連式）</strong></td>
+                                            <td class="damage-cell">4d6/2d6/1d6</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>12ケージショットガン（ポンプ）</strong></td>
+                                            <td class="damage-cell">4d6/2d6/1d6</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>10</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>12ケージショットガン（セミオート）</strong></td>
+                                            <td class="damage-cell">4d6/2d6/1d6</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>2</td>
+                                            <td>5</td>
+                                            <td>10</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>12ケージショットガン（二連式、切り落とし）</strong></td>
+                                            <td class="damage-cell">4d6/1d6</td>
+                                            <td class="range-cell">5/10</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>14</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>10ケージショットガン（二連式）</strong></td>
+                                            <td class="damage-cell">4d6+2/2d6+1/1d6</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>12</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>12ケージベリーニ（折り畳み式銃床）</strong></td>
+                                            <td class="damage-cell">4d6/2d6/1d6</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>2</td>
+                                            <td>7</td>
+                                            <td>14</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>12ケージSPAS（折り畳み式銃床）</strong></td>
+                                            <td class="damage-cell">4d6/2d6/1d6</td>
+                                            <td class="range-cell">10/20/50</td>
+                                            <td>1</td>
+                                            <td>8</td>
+                                            <td>6</td>
+                                            <td>98</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMGタブ -->
+                <div class="tab-pane fade" id="smg">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-spray-can me-3"></i>射撃（サブマシンガン）15％</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">あらゆるマシンピストルやサブマシンガンを撃つ時に使用する。アサルトライフルをフルオートまたはバーストで使う場合にも使用する。</p>
+                        </div>
+                        
+                        <h2>サブマシンガン</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>ベルクマンMP18I/MP18Ⅱ</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">20</td>
+                                            <td>2またはフル</td>
+                                            <td>20/30/32</td>
+                                            <td>10</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>H&K MP5</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">20</td>
+                                            <td>2またはフル</td>
+                                            <td>15/30</td>
+                                            <td>9</td>
+                                            <td>97</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>イングラムMAC11</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3またはフル</td>
+                                            <td>32</td>
+                                            <td>8</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>スコルピオンSMG</strong></td>
+                                            <td class="damage-cell">1d8</td>
+                                            <td class="range-cell">15</td>
+                                            <td>3またはフル</td>
+                                            <td>20</td>
+                                            <td>6</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>トンプソン</strong></td>
+                                            <td class="damage-cell">1d10+2</td>
+                                            <td class="range-cell">20</td>
+                                            <td>1またはフル</td>
+                                            <td>20/30/50</td>
+                                            <td>10</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ウージーSMG</strong></td>
+                                            <td class="damage-cell">1d10</td>
+                                            <td class="range-cell">20</td>
+                                            <td>2またはフル</td>
+                                            <td>32</td>
+                                            <td>8</td>
+                                            <td>98</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>マシンガン</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">二脚三脚を装着して連射で攻撃する武器。二脚を装着して一発ずつ撃つ場合はARを使用する。現代ではアサルトライフルとサブマシンガン、そして軽量のマシンガンの違いは少ない。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>1882型ガトリングガン</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">100</td>
+                                            <td>フル</td>
+                                            <td>200</td>
+                                            <td>20</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ブローニングオートライフルM1918</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">90</td>
+                                            <td>1またはフル</td>
+                                            <td>20</td>
+                                            <td>11</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>30口径ブローニングM1917A1</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">150</td>
+                                            <td>フル</td>
+                                            <td>250</td>
+                                            <td>12</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ブレン軽機関銃</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>2またはフル</td>
+                                            <td>30/100</td>
+                                            <td>10</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ルイス機関銃</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>フル</td>
+                                            <td>47/97</td>
+                                            <td>12</td>
+                                            <td>96</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ミニガン</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">200</td>
+                                            <td>フル</td>
+                                            <td>4000</td>
+                                            <td>30</td>
+                                            <td>98</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>FNミニミ</strong></td>
+                                            <td class="damage-cell">2d6</td>
+                                            <td class="range-cell">110</td>
+                                            <td>フル</td>
+                                            <td>30/200</td>
+                                            <td>11</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ヴィッカーズ30口径マシンガン</strong></td>
+                                            <td class="damage-cell">2d6+4</td>
+                                            <td class="range-cell">110</td>
+                                            <td>フル</td>
+                                            <td>250</td>
+                                            <td>12</td>
+                                            <td>99</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 重火器タブ -->
+                <div class="tab-pane fade" id="heavy">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-bomb me-3"></i>重火器・爆発物・砲</h1>
+                        
+                        <h2>投擲武器 - 20％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">投げた物体を対象に当てる技能。手のひらサイズ（または投げやすいように加工された武器）は[STR/5]m先まで投げることが出来る。有効距離は最大[STR/2]mまで伸ばすことが出来るが、この場合ペナルティーダイスを与える。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>モロトフカクテル</strong></td>
+                                            <td class="damage-cell">2d6+炎上</td>
+                                            <td class="range-cell">STR/5</td>
+                                            <td>1/2</td>
+                                            <td>使い捨て</td>
+                                            <td>0</td>
+                                            <td>95</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ダイナマイト</strong></td>
+                                            <td class="damage-cell">4d10/3m</td>
+                                            <td class="range-cell">STR/5</td>
+                                            <td>1/2</td>
+                                            <td>使い捨て</td>
+                                            <td>0</td>
+                                            <td>99</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>射撃（重火器）- 10％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">グレネードランチャー、携帯式ロケット砲など</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>M79グレネードランチャー</strong></td>
+                                            <td class="damage-cell">3d10/2m</td>
+                                            <td class="range-cell">20</td>
+                                            <td>1/3</td>
+                                            <td>1</td>
+                                            <td>12</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>LAW</strong></td>
+                                            <td class="damage-cell">8d10/1m</td>
+                                            <td class="range-cell">150</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>10</td>
+                                            <td>98</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>爆破 - 1%</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">この技能を持つものは爆発物の安全な取扱いに詳しい。また炸薬の設置と除去にも詳しい。地雷やそれに類するものは簡単に設置できる反面、除去は困難である。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>パイプ爆弾</strong></td>
+                                            <td class="damage-cell">1d10/3m</td>
+                                            <td class="range-cell">設置場所</td>
+                                            <td>使い捨て</td>
+                                            <td>使い捨て</td>
+                                            <td>0</td>
+                                            <td>95</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>プラスチック爆弾（C-4）4オンス</strong></td>
+                                            <td class="damage-cell">6d10/3m</td>
+                                            <td class="range-cell">設置場所</td>
+                                            <td>使い捨て</td>
+                                            <td>使い捨て</td>
+                                            <td>0</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>対人地雷</strong></td>
+                                            <td class="damage-cell">4d10/5m</td>
+                                            <td class="range-cell">設置場所</td>
+                                            <td>使い捨て</td>
+                                            <td>使い捨て</td>
+                                            <td>0</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>クレイモア地雷</strong></td>
+                                            <td class="damage-cell">6d6/20</td>
+                                            <td class="range-cell">設置場所</td>
+                                            <td>使い捨て</td>
+                                            <td>使い捨て</td>
+                                            <td>0</td>
+                                            <td>99</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>砲 - 1％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">この技能は何らかの形で軍隊で訓練を受け経験を積んだことを表す。個人用兵器の射程よりも遠くまで砲弾を飛ばすこの兵器を操作することが出来る。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>装弾数</th>
+                                            <th>耐久力</th>
+                                            <th>故障ナンバー</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>81mm迫撃砲</strong></td>
+                                            <td class="damage-cell">6d10/5m</td>
+                                            <td class="range-cell">500</td>
+                                            <td>1</td>
+                                            <td>個別</td>
+                                            <td>30</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>75㎜野砲</strong></td>
+                                            <td class="damage-cell">10d10/2m</td>
+                                            <td class="range-cell">500</td>
+                                            <td>1/4</td>
+                                            <td>個別</td>
+                                            <td>20</td>
+                                            <td>99</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>120㎜戦車砲</strong></td>
+                                            <td class="damage-cell">15d10/4m</td>
+                                            <td class="range-cell">2000</td>
+                                            <td>1</td>
+                                            <td>個別</td>
+                                            <td>50</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>艦船搭載の5インチ砲</strong></td>
+                                            <td class="damage-cell">12d10/4m</td>
+                                            <td class="range-cell">3000</td>
+                                            <td>1</td>
+                                            <td>自動装填</td>
+                                            <td>50</td>
+                                            <td>98</td>
                                         </tr>
                                     </tbody>
                                 </table>
