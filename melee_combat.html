@@ -1,689 +1,777 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>近接戦闘武器データベース</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --melee-color: #8e44ad;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .weapon-category {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+            margin: 30px 0;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .weapon-category h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .weapon-category h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        
+        .skill-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table thead th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 15px 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(103, 126, 234, 0.1);
+            transform: translateY(-1px);
+            transition: all 0.3s ease;
+        }
+        
+        .table tbody td {
+            vertical-align: middle;
+            padding: 12px 10px;
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .damage-cell {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .skill-cell {
+            color: var(--melee-color);
+            font-weight: 600;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--primary-color);
+            margin: 0 5px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pills .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--accent-color);
+        }
+        
+        .weapon-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            
+            .weapon-category h1 {
+                font-size: 1.5rem;
+            }
+            
+            .weapon-category h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>近接格闘（格闘）25％</h1>
-    <p>全ての素手の戦闘と、誰でも手に取って役に立てるような基本的な武器。
-        <br>
-        これは棍棒、手斧、ナイフ、瓶などの多くの即席の武器を含む
-    <p>
-    <hr>
-    <h2>棍棒</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-sword me-2"></i>
+                近接戦闘武器データベース
+            </a>
+        </div>
+    </nav>
 
-            <tr>
-                <td>こん棒</td>
-                <td>1d6+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    <h2>杖</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
+    <div class="container my-4">
+        <div class="main-container p-4">
+            <!-- ナビゲーション -->
+            <ul class="nav nav-pills nav-fill mb-4" id="weaponTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#brawling">
+                        <i class="fas fa-fist-raised weapon-icon"></i>格闘
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#swords">
+                        <i class="fas fa-sword weapon-icon"></i>刀剣
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#spears">
+                        <i class="fas fa-long-arrow-alt-right weapon-icon"></i>槍
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#axes">
+                        <i class="fas fa-axe weapon-icon"></i>斧
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#other">
+                        <i class="fas fa-tools weapon-icon"></i>その他
+                    </a>
+                </li>
+            </ul>
 
-            <tr>
-                <td>大きいこん棒</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
+            <div class="tab-content">
+                <!-- 格闘タブ -->
+                <div class="tab-pane fade show active" id="brawling">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-fist-raised me-3"></i>近接格闘（格闘）25％</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">全ての素手の戦闘と、誰でも手に取って役に立てるような基本的な武器。これは棍棒、手斧、ナイフ、瓶などの多くの即席の武器を含む。</p>
+                        </div>
 
-            <tr>
-                <td>小さいこん棒</td>
-                <td>1d6+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
+                        <h2>杖</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>大きいこん棒</strong></td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>小さいこん棒</strong></td>
+                                            <td class="damage-cell">1d6+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>タクティカルバトン</strong></td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>25</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>仕込み杖</strong></td>
+                                            <td class="damage-cell">1d6+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>燃えているたいまつ</strong></td>
+                                            <td class="damage-cell">1d6+炎上</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ブラックジャック</strong></td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <tr>
-                <td>タクティカルバトン</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>25</td>
-                <td></td>
-                <td></td>
-            </tr>
+                        <h2>ナイフ</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>ブラスナックル</strong></td>
+                                            <td class="damage-cell">1d3+1+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>9</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>小型ナイフ</strong></td>
+                                            <td class="damage-cell">1d4+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>9</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>中型ナイフ</strong></td>
+                                            <td class="damage-cell">1d4+2+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>大型ナイフ</strong></td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <tr>
-                <td>仕込み杖</td>
-                <td>1d6+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>10</td>
-                <td></td>
-                <td></td>
-            </tr>
+                        <h2>その他</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>電気の通じた導線（100V）</strong></td>
+                                            <td class="damage-cell">1d8+スタン</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>6</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>電気の通じた導線（200V）</strong></td>
+                                            <td class="damage-cell">2d8+スタン</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>6</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>スタンガン</strong></td>
+                                            <td class="damage-cell">1d3+スタン</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>7</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>催涙スプレー</strong></td>
+                                            <td class="damage-cell">スタン</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>7</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            
-            <tr>
-                <td>燃えているたいまつ</td>
-                <td>1d6+炎上</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
+                <!-- 刀剣タブ -->
+                <div class="tab-pane fade" id="swords">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-sword me-3"></i>近接格闘（刀剣）20％</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">刃渡り60㎝以上の全ての刃物</p>
+                        </div>
+                        
+                        <h2>刀剣</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>基本命中率</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>軽い刀剣</strong></td>
+                                            <td class="skill-cell">20%</td>
+                                            <td class="damage-cell">1d6+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>刀剣</strong></td>
+                                            <td class="skill-cell">20%</td>
+                                            <td class="damage-cell">1d6+1+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>重い刀剣</strong></td>
+                                            <td class="skill-cell">20%</td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <tr>
-                <td>ブラックジャック</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>4</td>
-                <td></td>
-                <td></td>
-            </tr>
+                        <h2>レイピア</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>基本命中率</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>フェンシングフォイル</strong></td>
+                                            <td class="skill-cell">20%</td>
+                                            <td class="damage-cell">1d6+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>レイピア</strong></td>
+                                            <td class="skill-cell">20%</td>
+                                            <td class="damage-cell">1d6+1+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>騎兵用サーベル</strong></td>
+                                            <td class="skill-cell">20%</td>
+                                            <td class="damage-cell">1d8+1+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-        </table>
+                        <h2>日本刀</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>基本命中率</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>日本刀</strong></td>
+                                            <td class="skill-cell">15%</td>
+                                            <td class="damage-cell">1d10+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>脇差</strong></td>
+                                            <td class="skill-cell">15%</td>
+                                            <td class="damage-cell">1d6+1+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>竹刀</strong></td>
+                                            <td class="skill-cell">15%</td>
+                                            <td class="damage-cell">スタン+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>太刀</strong></td>
+                                            <td class="skill-cell">15%</td>
+                                            <td class="damage-cell">2d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>30</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-    <h2>ナイフ</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
+                        <h2>青龍刀</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>青龍刀</strong></td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>青龍大刀</strong></td>
+                                            <td class="damage-cell">2d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>30</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <tr>
-                <td>ブラスナックル</td>
-                <td>1d3+1+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>9</td>
-                <td></td>
-                <td></td>
-            </tr>
+                <!-- 槍タブ -->
+                <div class="tab-pane fade" id="spears">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-long-arrow-alt-right me-3"></i>近接格闘（槍）20％</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">槍、ランス。投げる場合は投擲を使用する</p>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>基本命中率</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>槍</strong></td>
+                                            <td class="skill-cell">15%</td>
+                                            <td class="damage-cell">1d10+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>銃剣</strong></td>
+                                            <td class="skill-cell">15%</td>
+                                            <td class="damage-cell">1d6+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>12</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <tr>
-                <td>小型ナイフ</td>
-                <td>1d4+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>9</td>
-                <td></td>
-                <td></td>
-            </tr>
+                <!-- 斧タブ -->
+                <div class="tab-pane fade" id="axes">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-axe me-3"></i>近接格闘（斧）15％</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">斧、手斧、鎌などの切断武器</p>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>木斧</strong></td>
+                                            <td class="damage-cell">1d8+2+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>手斧、鎌</strong></td>
+                                            <td class="damage-cell">1d6+1+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>12</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <tr>
-                <td>中型ナイフ</td>
-                <td>1d4+2+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
+                <!-- その他タブ -->
+                <div class="tab-pane fade" id="other">
+                    <div class="weapon-category">
+                        <h1><i class="fas fa-tools me-3"></i>その他の近接武器</h1>
+                        
+                        <h2>近接格闘（フレイル）10％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">フレイル、鎖鎌、ムチなどの打撃武器</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>双節棍</strong></td>
+                                            <td class="damage-cell">1d8+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>三節棍</strong></td>
+                                            <td class="damage-cell">1d10+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>25</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>モーニングスター</strong></td>
+                                            <td class="damage-cell">1d8+2+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>15</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <tr>
-                <td>大型ナイフ</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+                        <h2>近接格闘（絞殺紐）15％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">首を絞めるために様々な長さの物体が使われる。犠牲者は脱出するために戦闘マヌーバーを行わなければならず、さもなくば1d6のダメージを受ける。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>絞殺紐</strong></td>
+                                            <td class="damage-cell">1d6+db</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-    <h2>その他</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
+                        <h2>近接格闘（チェーンソー）10％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">ガソリンで動く大量生産されたチェーンソーは1927年発。ただし、それより古いタイプのものも存在する。</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>チェーンソー</strong></td>
+                                            <td class="damage-cell">2d8</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>20</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <tr>
-                <td>電気の通じた導線（100V）</td>
-                <td>1d8+スタン</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>6</td>
-                <td></td>
-                <td></td>
-            </tr>
+                        <h2>近接格闘（鞭）5％</h2>
+                        <div class="skill-info">
+                            <p class="mb-0">投げ縄および鞭</p>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>ダメージ</th>
+                                            <th>基本射程</th>
+                                            <th>1Rの攻撃回数</th>
+                                            <th>耐久力</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>鞭</strong></td>
+                                            <td class="damage-cell">1d3</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>鎖鎌</strong></td>
+                                            <td class="damage-cell">1d6</td>
+                                            <td class="skill-cell">タッチ</td>
+                                            <td>1</td>
+                                            <td>4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <tr>
-                <td>電気の通じた導線（200V）</td>
-                <td>2d8+スタン</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>6</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>スタンガン</td>
-                <td>1d3+スタン</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>7</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>催涙スプレー</td>
-                <td>スタン</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>7</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    
-    <hr>
-
-    <h1>近接格闘（刀剣）20％</h1>
-    <p>刃渡り60㎝以上の全ての刃物</p>
-
-    <hr>
-    <h2>刀剣</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>基本命中率</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>軽い刀剣</td>
-                <td>20</td>
-                <td>1d6+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>10</td>
-                <td></td>
-                <td></td>
-            </tr>
-            
-            <tr>
-                <td>刀剣</td>
-                <td>20</td>
-                <td>1d6+1+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>重い刀剣</td>
-                <td>20</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    
-    <h2>レイピア</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>基本命中率</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>フェンシングフォイル</td>
-                <td>20</td>
-                <td>1d6+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>10</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>レイピア</td>
-                <td>20</td>
-                <td>1d6+1+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>騎兵用サーベル</td>
-                <td>20</td>
-                <td>1d8+1+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-
-    <h2>日本刀</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>基本命中率</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>日本刀</td>
-                <td>15</td>
-                <td>1d10+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>脇差</td>
-                <td>15</td>
-                <td>1d6+1+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>竹刀</td>
-                <td>15</td>
-                <td>スタン+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>太刀</td>
-                <td>15</td>
-                <td>2d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>30</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-        </table>
-
-    <h2>青龍刀</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>青龍刀</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>青龍大刀</td>
-                <td>2d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>30</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-        </table>
-    <hr>
-
-    <h1>近接格闘（槍）20%</h1>
-    <p>槍、ランス。投げる場合は投擲を使用する</p>
-    <hr>
-
-    <h2>槍</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>基本命中率</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>槍</td>
-                <td>15</td>
-                <td>1d10+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            
-            <tr>
-                <td>銃剣</td>
-                <td>15</td>
-                <td>1d6+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>12</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    <hr>
-
-
-    <h1>近接格闘（フレイル）10％</h1>
-    <p>フレイル、鎖鎌、ムチなどの打撃武器</p>
-    <hr>
-    <h2>フレイル</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>双節棍</td>
-                <td>1d8+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>20</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>三節棍</td>
-                <td>1d10+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>25</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>モーニングスター</td>
-                <td>1d8+2+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-
-        </table>
-    <hr>
-
-    <h1>近接格闘（斧）15%</h1>
-    <p>斧、手斧、鎌などの切断武器</p>
-    <hr>
-    <h2>斧</h2>
-        <table border="1">
-            <tr>
-                <th>名前</th>
-                <th>ダメージ</th>
-                <th>基本射程</th>
-                <th>1Rの攻撃回数</th>
-                <th>装弾数</th>
-                <th>耐久力</th>
-                <th>故障ナンバー</th>
-                <th>弾薬</th>
-            </tr>
-
-            <tr>
-                <td>木斧</td>
-                <td>1d8+2+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>15</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td>手斧、鎌</td>
-                <td>1d6+1+db</td>
-                <td>タッチ</td>
-                <td>1</td>
-                <td></td>
-                <td>12</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    <hr>
-
-    <h1>近接格闘（絞殺紐）15%</h1>
-    <p>首を絞めるために様々な長さの物体が使われる。
-        <br>犠牲者は脱出するために戦闘マヌーバーを行わなければならず、さもなくば1Ð6のダメージを受ける。
-    </p>
-    <hr>
-    <h2>絞殺紐</h2>
-    <table border="1">
-        <tr>
-            <th>名前</th>
-            <th>ダメージ</th>
-            <th>基本射程</th>
-            <th>1Rの攻撃回数</th>
-            <th>装弾数</th>
-            <th>耐久力</th>
-            <th>故障ナンバー</th>
-            <th>弾薬</th>
-        </tr>
-
-        <tr>
-            <td>絞殺紐</td>
-            <td>1d6+db</td>
-            <td>タッチ</td>
-            <td>1</td>
-            <td></td>
-            <td>1</td>
-            <td></td>
-            <td></td>
-        </tr>
-
-    </table>
-    <hr>
-
-    <h1>近接格闘（チェーンソー）10％</h1>
-    <p>ガソリンで動く大量生産されたチェーンソーは1927年発。
-        <br>ただし、それより古いタイプのものも存在する
-    </p>
-    <hr>
-        <h2>チェーンソー</h2>
-    <table border="1">
-        <tr>
-            <th>名前</th>
-            <th>ダメージ</th>
-            <th>基本射程</th>
-            <th>1Rの攻撃回数</th>
-            <th>装弾数</th>
-            <th>耐久力</th>
-            <th>故障ナンバー</th>
-            <th>弾薬</th>
-        </tr>
-
-        <tr>
-            <td>チェーンソー</td>
-            <td>2d8</td>
-            <td>タッチ</td>
-            <td>1</td>
-            <td></td>
-            <td>20</td>
-            <td></td>
-            <td></td>
-        </tr>
-
-    </table>
-    <hr>
-
-    <h1>近接格闘（鞭）5%</h1>
-    <p>投げ縄および鞭</p>
-    <hr>
-    <h2>鞭</h2>
-    <table border="1">
-        <tr>
-            <th>名前</th>
-            <th>ダメージ</th>
-            <th>基本射程</th>
-            <th>1Rの攻撃回数</th>
-            <th>装弾数</th>
-            <th>耐久力</th>
-            <th>故障ナンバー</th>
-            <th>弾薬</th>
-        </tr>
-
-        <tr>
-            <td>鞭</td>
-            <td>1d3</td>
-            <td>タッチ</td>
-            <td>1</td>
-            <td></td>
-            <td>4</td>
-            <td></td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>鎖鎌</td>
-            <td>1d6</td>
-            <td>タッチ</td>
-            <td>1</td>
-            <td></td>
-            <td>4</td>
-            <td></td>
-            <td></td>
-        </tr>
-
-    </table>
-    <hr>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
