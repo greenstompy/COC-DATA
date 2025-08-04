@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>破段能力一覧 - 仁義八行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --gold-color: #f39c12;
+            --wisdom-color: #9b59b6;
+            --shadow-color: #8e44ad;
+            --dream-color: #3498db;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        
+        .overview-section {
+            background: linear-gradient(135deg, rgba(52, 73, 94, 0.1), rgba(44, 62, 80, 0.1));
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .overview-section h2 {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .overview-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .ability-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-color), var(--accent-color));
+        }
+        
+        .ability-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .ability-card:nth-child(8n+1) { border-left: 4px solid var(--accent-color); }
+        .ability-card:nth-child(8n+2) { border-left: 4px solid var(--success-color); }
+        .ability-card:nth-child(8n+3) { border-left: 4px solid var(--gold-color); }
+        .ability-card:nth-child(8n+4) { border-left: 4px solid var(--wisdom-color); }
+        .ability-card:nth-child(8n+5) { border-left: 4px solid #e67e22; }
+        .ability-card:nth-child(8n+6) { border-left: 4px solid var(--dream-color); }
+        .ability-card:nth-child(8n+7) { border-left: 4px solid #e91e63; }
+        .ability-card:nth-child(8n+8) { border-left: 4px solid #16a085; }
+        
+        .ability-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .ability-title ruby {
+            ruby-align: center;
+        }
+        
+        .ability-title rt {
+            font-size: 0.6em;
+            color: var(--secondary-color);
+        }
+        
+        .ability-stats {
+            background: rgba(52, 73, 94, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .stat-value {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .ability-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .ability-description br {
+            margin-bottom: 8px;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--gold-color), var(--wisdom-color));
+            border: none;
+            border-radius: 2px;
+            margin: 40px 0;
+        }
+        
+            @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .ability-title {
+                font-size: 1.2rem;
+            }
+            
+            .overview-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-magic me-2"></i>
+                邯鄲世界データベース
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="main-container">
+            <!-- ヒーローセクション -->
+            <div class="hero-section">
+                <h1><i class="fas fa-star me-3"></i>破段</h1>
+                <p class="subtitle">固有の夢を紡ぐ者たちの能力</p>
+                <div class="text-center">
+                    <span class="badge bg-light text-dark px-3 py-2 fs-6">
+                        解号：「破段・顕象(はだん けんしょう)」
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <!-- 概要セクション -->
+                <div class="overview-section">
+                    <h2><i class="fas fa-info-circle me-2"></i>破段の概要</h2>
+                    <p>
+                        破段は、邯鄲世界において自分だけの夢を構築し展開する。<br>
+                        いわば固有技を習得する段階である。
+                    </p>
+                    <p>
+                        この破段に到達してからが夢界における戦闘の本領であり、序段以下ではこの破段が紡ぐ夢には対抗できない。<br>
+                        熟練者と未熟者を分かつ、一つの基準として認知されているものらしい。
+                    </p>
+                    <p class="mb-0">
+                        <strong>習得条件：</strong>＜夢見＞技能を120％以上にすることが必要である。
+                    </p>
+                </div>
+
+                <hr class="section-divider">
+
+                <h2 class="text-center mb-5 text-primary">
+                    <i class="fas fa-scroll me-2"></i>能力一覧
+                </h2>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+                    <!-- 仁の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬江親兵衛仁<rt>いぬえしんべえまさし</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">任意のMP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">自身</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                仁の破段。<br>
+                                技能判定を振る前に発動。<br>
+                                任意のMPを消費し、その値に応じて技能判定の成功率を上昇させる。<br>
+                                <strong>ハード：</strong>消費MPの2倍を成功率に加算<br>
+                                <strong>エキスパート：</strong>消費MPの5倍を成功率に加算
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 義の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬川荘助義任<rt>いぬかわそうすけよしとう</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">任意のMP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">自身</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                義の破段。<br>
+                                一時的に自身のSIZを増加させる。<br>
+                                増加量は消費MPとなる。<br>
+                                <strong>ハード：</strong>増加量は消費MPの5倍<br>
+                                <strong>エキスパート：</strong>増加量は消費MPの10倍<br>
+                                増加したSIZがSTRの2倍を超えた場合、術者は転倒し増加したSIZの値分のダメージを受ける。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 礼の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬村大角礼儀<rt>いぬむらだいかくまさのり</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">3MP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                礼の破段。<br>
+                                あなたは世界が形式によって成り立つことを知っている。<br>
+                                そのため、礼儀を重んじることで、他者との関係を円滑にする。<br>
+                                そして礼とはすなわち他者に寄り添う心である。<br>
+                                対象の心理を一つ読み取ることができる。<br>
+                                <strong>ハード：</strong>対象の心理を2つ読み取る<br>
+                                <strong>エキスパート：</strong>対象の心理を3つ読み取る
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 智の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬坂毛野胤智<rt>いぬさかけのたねとも</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">5MP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                智の破段。<br>
+                                味方一人の未来を予知する。<br>
+                                1d100を一回振る。<br>
+                                対象が判定を振る際、出た出目の値を代わりに使ってもよい。<br>
+                                <strong>ハード：</strong>出目の値を-10<br>
+                                <strong>エキスパート：</strong>出目の値を-20
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 忠の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬山道節忠与<rt>いぬやまどうせつただとも</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">0MP（後消費）</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                忠の破段。<br>
+                                対象のHPを全て回復させる。<br>
+                                その後、回復させたHPの値をMPとして消費する。<br>
+                                <strong>ハード：</strong>消費MPを1/2（端数切捨て）<br>
+                                <strong>エキスパート：</strong>消費MPを1/5（端数切捨て）
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 信の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬飼現八信道<rt>いぬかいげんぱちのぶみち</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">MPを全て消費</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">半径20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                信の破段。<br>
+                                対象の状態を1R前まで逆行させる。<br>
+                                これはHP、MP、SAN値、技能値、その他の状態に適用される。<br>
+                                <strong>ハード：</strong>対象の状態を2R前まで逆行<br>
+                                <strong>エキスパート：</strong>対象の状態を任意の時点まで逆行
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 孝の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬塚信乃戌孝<rt>いぬづかしのもりたか</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">1MP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">半径20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                孝の破段。<br>
+                                仲間たちの間で成立する能力の共有化。<br>
+                                自身の技能1つと味方1体対象とする。<br>
+                                このRの間、対象がその技能を振る際、自身の技能値でダイスを振ることが出来る。<br>
+                                <strong>ハード：</strong>対象の技能値を+10<br>
+                                <strong>エキスパート：</strong>対象の技能値を+20
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 悌の破段 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>犬田小文吾悌順<rt>いぬたこぶんごやすのり</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">1MP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">半径20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                悌の破段。<br>
+                                仲間たちの間で成立する能力の共有化。<br>
+                                仲間1人の特定の技能1つを対象とする。<br>
+                                このRの間、その技能を振る際、対象の技能値でダイスを振ることが出来る。<br>
+                                <strong>ハード：</strong>対象の技能値を+10<br>
+                                <strong>エキスパート：</strong>対象の技能値を+20
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
