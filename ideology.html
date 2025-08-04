@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イデオロギー - 仁義八行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --gold-color: #f39c12;
+            --wisdom-color: #9b59b6;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .virtue-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .virtue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-color), var(--accent-color));
+        }
+        
+        .virtue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .virtue-card:nth-child(8n+1) .virtue-icon { color: var(--accent-color); }
+        .virtue-card:nth-child(8n+2) .virtue-icon { color: var(--success-color); }
+        .virtue-card:nth-child(8n+3) .virtue-icon { color: var(--gold-color); }
+        .virtue-card:nth-child(8n+4) .virtue-icon { color: var(--wisdom-color); }
+        .virtue-card:nth-child(8n+5) .virtue-icon { color: #e67e22; }
+        .virtue-card:nth-child(8n+6) .virtue-icon { color: #3498db; }
+        .virtue-card:nth-child(8n+7) .virtue-icon { color: #e91e63; }
+        .virtue-card:nth-child(8n+8) .virtue-icon { color: #16a085; }
+        
+        .virtue-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+        
+        .virtue-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .virtue-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            text-align: center;
+        }
+        
+        .virtue-keywords {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keyword-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .virtue-icon {
+                font-size: 2.5rem;
+            }
+            
+            .virtue-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-yin-yang me-2"></i>
+                仁義八行データベース
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="main-container">
+            <!-- ヒーローセクション -->
+            <div class="hero-section">
+                <h1><i class="fas fa-torii-gate me-3"></i>仁義八行</h1>
+                <p class="subtitle">八つの徳目が織りなす理想の生き方</p>
+            </div>
+
+            <div class="p-4">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                    <!-- 仁 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-heart virtue-icon"></i>
+                            <h5 class="virtue-title">仁</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">思いやり</span>
+                                <span class="keyword-badge">慈悲</span>
+                                <span class="keyword-badge">博愛</span>
+                            </div>
+                            <p class="virtue-description">
+                                他人を尊重し慈しむ心。人を思いやる心があれば、他人の痛みもわかる。すべての人間関係の基盤となる、最も根本的な徳目である。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 義 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-balance-scale virtue-icon"></i>
+                            <h5 class="virtue-title">義</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">正義</span>
+                                <span class="keyword-badge">道理</span>
+                                <span class="keyword-badge">節操</span>
+                            </div>
+                            <p class="virtue-description">
+                                正しいことを行い、道理に従うこと。自分の信念を貫くために、時には困難な選択をすることもある。正義を貫く強い意志を表す。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 礼 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-hands-praying virtue-icon"></i>
+                            <h5 class="virtue-title">礼</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">礼儀</span>
+                                <span class="keyword-badge">敬意</span>
+                                <span class="keyword-badge">感謝</span>
+                            </div>
+                            <p class="virtue-description">
+                                他人に対して敬意を払い、感謝の気持ちを忘れないこと。礼儀正しさとは即ち他者に寄り添い理解するための基本である。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 智 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-brain virtue-icon"></i>
+                            <h5 class="virtue-title">智</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">知恵</span>
+                                <span class="keyword-badge">学問</span>
+                                <span class="keyword-badge">洞察</span>
+                            </div>
+                            <p class="virtue-description">
+                                知識を深め、物事の本質を理解すること。学び続けることで、より良い判断ができるようになる。真の智慧は経験と学習から生まれる。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 忠 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-shield-alt virtue-icon"></i>
+                            <h5 class="virtue-title">忠</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">忠誠</span>
+                                <span class="keyword-badge">信頼</span>
+                                <span class="keyword-badge">献身</span>
+                            </div>
+                            <p class="virtue-description">
+                                自分の信念や仲間に対して忠実であること。信頼関係を築くためには、誠実さと献身が必要である。裏切らない心の強さを表す。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 信 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-handshake virtue-icon"></i>
+                            <h5 class="virtue-title">信</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">信頼</span>
+                                <span class="keyword-badge">誠実</span>
+                                <span class="keyword-badge">約束</span>
+                            </div>
+                            <p class="virtue-description">
+                                他人との信頼関係を大切にし、約束を守ること。信頼は人間関係の基盤であり、誠実な行動がそれを築く。言葉に責任を持つ姿勢。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 孝 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-home virtue-icon"></i>
+                            <h5 class="virtue-title">孝</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">家族愛</span>
+                                <span class="keyword-badge">先人への敬意</span>
+                                <span class="keyword-badge">感謝</span>
+                            </div>
+                            <p class="virtue-description">
+                                家族や先達に対する感謝の気持ちを忘れず、敬うこと。家族との絆を大切にし、先人の教えを受け継ぎよりよい形で後進に引き継ぐことが重要である。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 悌 -->
+                    <div class="col">
+                        <div class="virtue-card">
+                            <i class="fas fa-users virtue-icon"></i>
+                            <h5 class="virtue-title">悌</h5>
+                            <div class="virtue-keywords">
+                                <span class="keyword-badge">友情</span>
+                                <span class="keyword-badge">協力</span>
+                                <span class="keyword-badge">絆</span>
+                            </div>
+                            <p class="virtue-description">
+                                友人との絆を大切にし、互いに助け合うこと。協力し合うことで、より強い絆が生まれ、困難を乗り越える力となる。共に歩む心を大切にする。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
