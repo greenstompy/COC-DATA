@@ -89,10 +89,11 @@
         .melee-combat { color: #e74c3c; }
         .range-combat { color: #f39c12; }
         .armor { color: #3498db; }
+        .rules { color: #8e44ad; }
+        .ideology { color: #2c3e50; }
         .hadan { color: #9b59b6; }
         .kyudan { color: #1abc9c; }
         .tsuidan { color: #e67e22; }
-        .ideology { color: #2c3e50; }
 
         .footer {
             margin-top: 4rem;
@@ -203,7 +204,7 @@
 
             <!-- 防具 -->
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card loading ripple" data-category="armor" style="animation-delay: 0.3s">
+                <div class="card category-card loading ripple" data-category="aromor" style="animation-delay: 0.3s">
                     <div class="card-body text-center p-4">
                         <i class="fas fa-shield-alt card-icon armor"></i>
                         <h3 class="card-title">防具</h3>
@@ -215,9 +216,37 @@
                 </div>
             </div>
 
+            <!-- ルール -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="rule" style="animation-delay: 0.4s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-dice-d20 card-icon rules"></i>
+                        <h3 class="card-title">ルール</h3>
+                        <p class="card-description">
+                            幸運ポイント、特殊ルール、拡張技能などのデータ。<br>
+                            ゲームを有利に進めるためのシステムをご活用ください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 仁義八行 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="ideology" style="animation-delay: 0.5s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-torii-gate card-icon ideology"></i>
+                        <h3 class="card-title">仁義八行</h3>
+                        <p class="card-description">
+                            八つの徳目が織りなす理想の生き方。<br>
+                            邯鄲世界の基盤となる思想と価値観です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <!-- 破段 -->
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card loading ripple" data-category="hadan" style="animation-delay: 0.4s">
+                <div class="card category-card loading ripple" data-category="hadan" style="animation-delay: 0.6s">
                     <div class="card-body text-center p-4">
                         <i class="fas fa-star card-icon hadan"></i>
                         <h3 class="card-title">破段</h3>
@@ -231,7 +260,7 @@
 
             <!-- 急段 -->
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card loading ripple" data-category="kyudan" style="animation-delay: 0.5s">
+                <div class="card category-card loading ripple" data-category="kyudan" style="animation-delay: 0.7s">
                     <div class="card-body text-center p-4">
                         <i class="fas fa-bolt card-icon kyudan"></i>
                         <h3 class="card-title">急段</h3>
@@ -245,7 +274,7 @@
 
             <!-- 終段 -->
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card loading ripple" data-category="tsuidan" style="animation-delay: 0.6s">
+                <div class="card category-card loading ripple" data-category="tsuidan" style="animation-delay: 0.8s">
                     <div class="card-body text-center p-4">
                         <i class="fas fa-crown card-icon tsuidan"></i>
                         <h3 class="card-title">終段</h3>
@@ -256,27 +285,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 仁義八行 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card category-card loading ripple" data-category="ideology" style="animation-delay: 0.7s">
-                    <div class="card-body text-center p-4">
-                        <i class="fas fa-torii-gate card-icon ideology"></i>
-                        <h3 class="card-title">仁義八行</h3>
-                        <p class="card-description">
-                            八つの徳目が織りなす理想の生き方。<br>
-                            邯鄲世界の基盤となる思想と価値観です。
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
     <!-- フッター -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-text loading" style="animation-delay: 0.7s">
+            <p class="footer-text loading" style="animation-delay: 0.8s">
                 &copy; 2025 邯鄲世界データベース - 夢と現実の境界を紡ぐ者たちのために
             </p>
         </div>
@@ -302,15 +317,16 @@
                     
                     // 実際のページ遷移
                     setTimeout(() => {
-                        // 修正されたリンクマッピング
+                        // 実際の邯鄲世界データベースページへリンク
                         const pageMap = {
                             'melee_combat': 'melee_combat.html',
                             'range_combat': 'range_combat.html', 
-                            'armor': 'armor.html',
+                            'aromor': 'aromor.html',
+                            'rule': 'rule.html',
+                            'ideology': 'ideology_bs5 (1).html',
                             'hadan': 'hadan.html',
-                            'kyudan': 'kyudan.html',
-                            'tsuidan': 'tsuidan.html',
-                            'ideology': 'ideology.html'
+                            'kyudan': 'kyudan_page.html',
+                            'tsuidan': 'tsuidan_page.html'
                         };
                         
                         if (pageMap[category]) {
@@ -340,9 +356,9 @@
                 parallax.style.backgroundPosition = `center ${speed}px`;
             });
             
-            // キーボードナビゲーション
+            // キーボードナビゲーション (1-8でアクセス)
             document.addEventListener('keydown', function(e) {
-                if (e.key >= '1' && e.key <= '7') {
+                if (e.key >= '1' && e.key <= '8') {
                     const index = parseInt(e.key) - 1;
                     const cards = document.querySelectorAll('.category-card');
                     if (cards[index]) {
@@ -373,7 +389,7 @@
         // ページ読み込み完了時のメッセージ
         window.addEventListener('load', function() {
             console.log('邯鄲世界データベースが読み込まれました');
-            console.log('キーボードの1-7キーでカテゴリに直接アクセスできます');
+            console.log('キーボードの1-8キーでカテゴリに直接アクセスできます');
         });
     </script>
 </body>
