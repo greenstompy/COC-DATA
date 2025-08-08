@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>終段能力一覧 - 邯鄲世界データベース</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --gold-color: #f4d03f;
+            --mystic-purple: #8e44ad;
+            --deep-blue: #2c3e50;
+            --divine-white: #ecf0f1;
+            --shadow-dark: #0f0f23;
+            --gradient-divine: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --gradient-cosmic: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        }
+        
+        body {
+            background: var(--gradient-divine);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(244, 208, 63, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(142, 68, 173, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(233, 69, 96, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255,255,255,0.1);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .hero-section {
+            background: var(--gradient-cosmic);
+            color: var(--divine-white);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30% 30%, rgba(244, 208, 63, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(142, 68, 173, 0.2) 0%, transparent 40%);
+            animation: mysticalGlow 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes mysticalGlow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.05); }
+        }
+        
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 20px rgba(244, 208, 63, 0.5),
+                2px 2px 4px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.1em;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+        
+        .hero-section .badge {
+            background: rgba(244, 208, 63, 0.2) !important;
+            color: var(--gold-color) !important;
+            border: 1px solid rgba(244, 208, 63, 0.4);
+            backdrop-filter: blur(10px);
+            font-size: 1rem !important;
+            padding: 10px 20px !important;
+            border-radius: 25px !important;
+        }
+        
+        .overview-section {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.05), rgba(22, 33, 62, 0.1));
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 6px solid var(--gold-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .overview-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(244, 208, 63, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .overview-section h2 {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+        
+        .overview-section p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        
+        .ability-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.1),
+                0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-divine);
+        }
+        
+        .ability-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(244, 208, 63, 0.03) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .ability-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(244, 208, 63, 0.2);
+        }
+        
+        .ability-card:hover::after {
+            opacity: 1;
+        }
+        
+        /* 特殊な能力カードの色分け */
+        .ability-card:nth-child(4n+1) { border-left: 5px solid var(--accent-color); }
+        .ability-card:nth-child(4n+2) { border-left: 5px solid var(--gold-color); }
+        .ability-card:nth-child(4n+3) { border-left: 5px solid var(--mystic-purple); }
+        .ability-card:nth-child(4n+4) { border-left: 5px solid var(--deep-blue); }
+        
+        .ability-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .ability-title ruby {
+            ruby-align: center;
+        }
+        
+        .ability-title rt {
+            font-size: 0.6em;
+            color: var(--secondary-color);
+            opacity: 0.8;
+        }
+        
+        .ability-stats {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.03), rgba(22, 33, 62, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(244, 208, 63, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .stat-value {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .ability-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #555;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .ability-description br {
+            margin-bottom: 10px;
+        }
+        
+        .navbar {
+            background: var(--gradient-cosmic) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .section-divider {
+            height: 4px;
+            background: var(--gradient-divine);
+            border: none;
+            border-radius: 2px;
+            margin: 50px 0;
+            box-shadow: 0 0 20px rgba(244, 208, 63, 0.3);
+        }
+        
+        .abilities-title {
+            background: var(--gradient-cosmic);
+            color: var(--divine-white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .abilities-title h2 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px rgba(244, 208, 63, 0.5);
+        }
+        
+        /* 特別な能力のスタイル */
+        .ultimate-ability {
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.05), rgba(142, 68, 173, 0.05)) !important;
+            border: 2px solid var(--gold-color) !important;
+        }
+        
+        .ultimate-ability .ability-title {
+            color: var(--gold-color);
+            text-shadow: 0 0 10px rgba(244, 208, 63, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .ability-title {
+                font-size: 1.3rem;
+            }
+            
+            .overview-section {
+                padding: 25px;
+            }
+            
+            .ability-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-crown me-2"></i>
+                邯鄲世界データベース
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="main-container">
+            <!-- ヒーローセクション -->
+            <div class="hero-section">
+                <h1><i class="fas fa-infinity me-3"></i>終段</h1>
+                <p class="subtitle">邯鄲法の究極なる境地</p>
+                <div class="text-center">
+                    <span class="badge">
+                        解号：「終段・顕象(ついだん けんしょう)」
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <!-- 概要セクション -->
+                <div class="overview-section">
+                    <h2><i class="fas fa-eye me-2"></i>終段の概要</h2>
+                    <p>
+                        終段とは盧生のみが揮い得る邯鄲法の最終段階である。<br>
+                        普遍的無意識に内包されるありとあらゆる奇跡を引き出し利用する。
+                    </p>
+                    <p>
+                        まさしく邯鄲の夢にまつわる万象の奥義に相応しい力である。<br>
+                        古今東西におよぶ種別様々な神話的存在の具現、ないしは神話的事象の再現と言った用途で行使される。
+                    </p>
+                    <p class="mb-0">
+                        また、使用するに際しあらゆるコストを必要としない。<br>
+                        <strong>習得条件：</strong>＜夢見＞技能を300％以上にすることが必要である。
+                    </p>
+                </div>
+
+                <hr class="section-divider">
+
+                <div class="abilities-title">
+                    <h2>
+                        <i class="fas fa-scroll me-2"></i>能力一覧
+                    </h2>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+                    <!-- 重軽顛倒 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>重軽顛倒<rt>じゅうきょうてんどう</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">20ｍ</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                宗冬の破段。<br>
+                                相手を軽んじるほどに対象を軽くしていく能力。<br>
+                                最大でダメージを6点まで軽減する。<br>
+                                元になった渇望は「万象全ては羽毛の如く軽い」という彼の価値観。<br>
+                                <strong>解号：</strong>「一切軽安（いっさいけいあん）」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 穢跡金剛禁百変法 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>穢跡金剛禁百変法<rt>えしゃくこんごうきんひゃっぺんほう</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">1人</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                宗冬の急段。<br>
+                                対象にあらゆる厄災を振りまく負の力。<br>
+                                しかし生前の宗冬が左腕を禁じることで協力強制を用いて威力を高めていたが健常なこちらは文字通り片手落ち。<br>
+                                通常の使用に関しては対象の判定に-20％の補正とダメージに-6点を与える。<br>
+                                または自身の判定に+20％の補正とダメージに₊6点の補正を与えることに留まる。<br>
+                                協力強制の条件は「対象が自身になんらかの切り札を持っていると思うこと」。<br>
+                                <strong>解号：</strong>「左道大逆魘魅蟲（さどうたいぎゃくえんみのかしり）」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 夢合延寿袋大成 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>夢合延寿袋大成<rt>ゆめあわせえんじゅのふくろたいせい</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">20ｍ</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                星川の破段。<br>
+                                自分が受けた負荷をその場の誰かにランダムで渡す運命操作の破段。<br>
+                                無作為に負荷を擦り付ける大博打の術。対象には自分や対戦相手、無関係な者も含まれる。<br>
+                                参加者が多く、回数を重ねるほど破壊力が増大していく。<br>
+                                運否天賦による平等な災いの術。<br>
+                                ダメージを受けた場合に新たに対象を決定し直す。<br>
+                                元になった渇望は「皆で負荷を分け合うことで、個々の負荷を軽減することができる」という想いから生まれた破段。<br>
+                                <strong>解号：</strong>「天運我にありや否」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 大般涅槃・常楽我浄 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>大般涅槃・常楽我浄<rt>だいはつねはん・じょうらくがじょう</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">10/100ｍ</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                星川の急段。<br>
+                                他者の精神的、肉体的な負荷を全て己に引き受ける。<br>
+                                星川は己の死を対価にしたことで神の杖を防ぐほどの力を見せた。<br>
+                                ダメージを受ける際MPを1点消費することで1点の装甲を得る。<br>
+                                元になった渇望は「誰かを守りたい」。<br>
+                                協力強制の条件は「自身が守りたいと思い、対象が守られたいと思っていること」。<br>
+                                <strong>解号：</strong>「見し夢を獏の餌食と成すからに心も晴れし曙の空」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 生死之縛・玻璃爛宮逆サ磔 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>生死之縛・玻璃爛宮逆サ磔<rt>しょうししばく・はりらんきゅうさかさはりつけ</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">20m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                加藤保憲の急段。<br>
+                                対象の持つ『輝き』と術者の『病み』を等価交換するというもの。<br>
+                                この夢が奪う『輝き』は有形・無形を問わず、肉体のパーツといった物理的なものから始まり、<br>
+                                感情・記憶・技量・勘といった精神的なもの、異能や才能等の概念的なものまで含まれる。<br>
+                                効果のほどはKPと相談してね。<br>
+                                この急段の純粋な効果自体は対象者と自身の身体・精神・概念的な構成要素の交換に過ぎず、<br>
+                                一般の人間が使用した場合には本編ほどの劇的な効果は期待できない。<br>
+                                元になった渇望は「己を見下すものを許さない」。<br>
+                                協力強制の条件は「他人が自分に対してなんらかの負の感情を持つこと、および自身がその理由に答えられること」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 盂蘭盆教・地獄巡り -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>盂蘭盆教・地獄巡り<rt>うらぼんきょう・じごくめぐり</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">0MP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">1体</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                鶴見の急段。<br>
+                                目連尊者の地獄巡りを再現した等価交換の急段。<br>
+                                自分にとって大切なものを供物として差し出し、それに見合った救済を相手に与える。<br>
+                                主観的価値による贔屓まみれの天秤で機能する。<br>
+                                最終的に自身と部下の存在を対価として百鬼空亡を浄化した。<br>
+                                元になった渇望は「愛を持って誰かを救いたい」。<br>
+                                協力強制の条件は「対象が救われたいと思っていること」。<br>
+                                <strong>解号：</strong>「六道巡りし功徳もって、倒懸の苦を救う」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 傾城反魂香 -->
+                    <div class="col">
+                        <div class="ability-card">
+                            <h5 class="ability-title">
+                                <ruby>傾城反魂香<rt>けいせいはんごんこう</rt></ruby>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">半径200m</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                百合香の破段。<br>
+                                対象に無条件で好意を抱かせるというもの。<br>
+                                ただし最初から自身に好意を持っているものには効果がない。<br>
+                                自身に好意を持っているものが術者に対して攻撃行動を行おうとしたとき<br>
+                                そのダメージに-6点の補正を与える。<br>
+                                元になった渇望は「真に愛されたい」。<br>
+                                <strong>解号：</strong>「いざや散れ、常世咲き裂く怨天の花」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- すべての想いに巡りくる祝福を -->
+                    <div class="col">
+                        <div class="ability-card ultimate-ability">
+                            <h5 class="ability-title">
+                                すべての想いに巡りくる祝福を<br>
+                                <small>（メモル・モルティス）</small>
+                            </h5>
+                            <div class="ability-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">消費コスト：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">射程：</span>
+                                    <span class="stat-value">なし</span>
+                                </div>
+                            </div>
+                            <p class="ability-description">
+                                盧生の終段。<br>
+                                召喚術の一種にして神の奇跡の再現。<br>
+                                君たちに縁のあるNPCを1体、邯鄲世界に現出させる。<br>
+                                対象は邯鄲の普遍的無意識に記録されたものかつ、自身の呼びかけに答えるものに限定される。<br>
+                                <strong>解号はない。</strong>かっこよく友（宿敵）に呼び掛けてやってください。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

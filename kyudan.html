@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能力一覧 - 急段</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.1em;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        
+        .content-section {
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #34495e;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .cooperation-section {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+        
+        .cooperation-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .example-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .example-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .example-title::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .ability-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            overflow: hidden;
+        }
+        
+        .ability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        
+        .ability-stats {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ability-stats li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .ability-stats strong {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .card-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 2px;
+            margin: 60px 0;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            transform-origin: left;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator"></div>
+    
+    <div class="container-fluid px-0">
+        <div class="main-container">
+            <!-- ヘッダーセクション -->
+            <div class="header-section">
+                <div class="container">
+                    <h1 class="main-title">急段</h1>
+                    <p class="subtitle">邯鄲における究極の技術</p>
+                </div>
+            </div>
+
+            <!-- 急段の概要 -->
+            <div class="content-section">
+                <div class="container">
+                    <h2 class="section-title">急段の概要</h2>
+                    <p class="description-text">
+                        この急段への到達は邯鄲における二つの技能の習熟を示すものである。<br>
+                        急段の重要な要素は協力強制にある。<br>
+                        協力強制の性質上、展開される邯鄲法はいわば『術者と敵の双方によって機能した』ものであるため、<br>
+                        ひとたびこの急段が成立したならば、その束縛から脱することは困難を極める。<br>
+                        邯鄲における戦闘の事実上の必殺を意味する大技である。<br>
+                        解号は「急段・顕象(きゅうだん けんしょう)」。<br>
+                        習得には、＜夢見＞技能を240％以上にすることが必要である。
+                    </p>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 協力強制セクション -->
+            <div class="cooperation-section">
+                <div class="container">
+                    <div class="cooperation-content">
+                        <h2 class="section-title" style="color: white;">協力強制</h2>
+                        
+                        <p class="description-text" style="color: rgba(255, 255, 255, 0.9);">
+                            邯鄲法でどれだけのことを成し得るかは「夢」への想いの強さに依存する。<br>
+                            「協力強制」とは、その基本原理をふまえ、相手の力を利用し「場の流れ」を誘導する技術を指す。
+                        </p>
+                        
+                        <div class="example-box">
+                            <h6 class="example-title">実例：右腕を失った戦士</h6>
+                            <p style="margin-bottom: 15px;">
+                                右腕のない戦士がいたとする。<br>
+                                戦士は自己から欠落した"右"という概念に狂的な執着を持っており、戦いになれば敵の右側しか狙わない。
+                                そうした枷を自分自身に掛けている。
+                            </p>
+                            <p style="margin-bottom: 15px;">
+                                そうした者を前にして、敵はいったい何を思い、どう対処するだろうか。<br>
+                                おそらく、こう考えるのではないだろうか。<br>
+                                <strong>彼は右だけを狙っている。つまり左を狙うことはない。</strong>
+                            </p>
+                            <p style="margin-bottom: 15px;">
+                                この時、両者の間に合意が形成されることになるのだ。<br>
+                                <em>曰く左は不要と。</em>
+                            </p>
+                            <p>
+                                瞬間、敵は自らの左半身を根こそぎ喪失してしまうか、よくても機能不全になるだろう。
+                            </p>
+                        </div>
+
+                        <p class="description-text" style="color: rgba(255, 255, 255, 0.9);">
+                            言ってしまえば『自分の土俵に相手を乗せる』技術の事である。<br>
+                            想いの、想像力の強さがそのまま力となる世界にあっては、<br>
+                            自分にとってプラスとなる思い込みはプラスの力に昇華され、<br>
+                            反対に『自分にとって不都合となる思い込み』を生じさせてしまった場合、<br>
+                            想像力が豊かであればあるほど、<br>
+                            より強固にその『枷』に縛られることとなる。
+                        </p>
+                        <p class="description-text" style="color: rgba(255, 255, 255, 0.9);">
+                            そしてこの協力強制自体、そう都合の良い設定や変更の効くものではない。<br>
+                            一人に付き一つか二つ<br>
+                            <strong>「術者の人生を象徴するような、強い拘りや哲学を体現したもの」</strong>という制限が付いている
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 能力一覧 -->
+            <div class="content-section">
+                <div class="container">
+                    <h2 class="section-title">能力一覧</h2>
+
+                    <div class="row row-cols-1 g-4">
+                        <!-- 仁義八行 -->
+                        <div class="col">
+                            <div class="card ability-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">仁義八行</h5>
+                                    <ul class="list-unstyled ability-stats">
+                                        <li><strong>消費コスト：</strong> XMP</li>
+                                        <li><strong>射程：</strong> 自身</li>
+                                    </ul>
+                                    <p class="card-text">
+                                        名の通り仁義八行を体現した盧生の邯鄲法。<br>
+                                        自身とその眷属が保持するあらゆる破段と急段を相互に使用可能にする。<br>
+                                        協力強制の条件は対象と自身が相互に「仁義八行」の概念を信じ、それを体現しようとしていること。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // スクロールインジケーター
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-indicator').style.transform = `scaleX(${scrolled / 100})`;
+        });
+
+        // カードホバーエフェクト
+        document.querySelectorAll('.ability-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

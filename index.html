@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邯鄲世界データベース</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --text-light: #ecf0f1;
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header {
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-title {
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        .subtitle {
+            color: #bdc3c7;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .category-grid {
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            overflow: hidden;
+            height: 100%;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .melee-combat { color: #e74c3c; }
+        .range-combat { color: #f39c12; }
+        .armor { color: #3498db; }
+        .hadan { color: #9b59b6; }
+        .kyudan { color: #1abc9c; }
+        .tsuidan { color: #e67e22; }
+        .ideology { color: #2c3e50; }
+
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            background: rgba(44, 62, 80, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            text-align: center;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .category-grid {
+                margin-top: 2rem;
+            }
+        }
+
+        /* ローディングアニメーション */
+        .loading {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* カードクリック時のリップル効果 */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(52, 73, 94, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple:active::before {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header py-4">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="main-title loading">邯鄲世界データベース</h1>
+                <p class="subtitle loading">Kandan World Data Collection</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="container py-5">
+        <div class="row category-grid g-4">
+            <!-- 近接戦闘 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="melee_combat" style="animation-delay: 0.1s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-sword card-icon melee-combat"></i>
+                        <h3 class="card-title">近接戦闘</h3>
+                        <p class="card-description">
+                            剣、斧、槍などの近距離武器のデータを収録。<br>
+                            白兵戦で使用する武器の詳細情報をご覧いただけます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 遠距離戦闘 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="range_combat" style="animation-delay: 0.2s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-crosshairs card-icon range-combat"></i>
+                        <h3 class="card-title">遠距離戦闘</h3>
+                        <p class="card-description">
+                            銃器、弓矢、投擲武器などの遠距離武器データ。<br>
+                            射撃戦闘に関する武器の性能をご確認ください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 防具 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="aromor" style="animation-delay: 0.3s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-shield-alt card-icon armor"></i>
+                        <h3 class="card-title">防具</h3>
+                        <p class="card-description">
+                            鎧、盾、防護服などの防具データを掲載。<br>
+                            キャラクターを守る装備の詳細情報です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 破段 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="hadan" style="animation-delay: 0.4s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-star card-icon hadan"></i>
+                        <h3 class="card-title">破段</h3>
+                        <p class="card-description">
+                            固有の夢を紡ぐ者たちの能力データ。<br>
+                            仁義八行の力を体現する技の情報です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 急段 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="kyudan" style="animation-delay: 0.5s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-bolt card-icon kyudan"></i>
+                        <h3 class="card-title">急段</h3>
+                        <p class="card-description">
+                            邯鄲における究極の技術データ。<br>
+                            協力強制による必殺技の詳細情報です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 終段 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="tsuidan" style="animation-delay: 0.6s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-crown card-icon tsuidan"></i>
+                        <h3 class="card-title">終段</h3>
+                        <p class="card-description">
+                            邯鄲法の究極なる境地の能力データ。<br>
+                            盧生のみが扱える最強の技術情報です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 仁義八行 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card loading ripple" data-category="ideology" style="animation-delay: 0.7s">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-torii-gate card-icon ideology"></i>
+                        <h3 class="card-title">仁義八行</h3>
+                        <p class="card-description">
+                            八つの徳目が織りなす理想の生き方。<br>
+                            邯鄲世界の基盤となる思想と価値観です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text loading" style="animation-delay: 0.7s">
+                &copy; 2025 邯鄲世界データベース - 夢と現実の境界を紡ぐ者たちのために
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // カードクリック時の処理
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // クリック時のフィードバック
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    // 実際のページ遷移
+                    setTimeout(() => {
+                        // 実際の邯鄲世界データベースページへリンク
+                        const pageMap = {
+                            'melee_combat': 'melee_combat.html',
+                            'range_combat': 'range_combat.html', 
+                            'aromor': 'aromor.html',
+                            'hadan': 'hadan.html',
+                            'kyudan': 'kyudan_page.html',
+                            'tsuidan': 'tsuidan_page.html',
+                            'ideology': 'ideology_bs5 (1).html'
+                        };
+                        
+                        if (pageMap[category]) {
+                            window.location.href = pageMap[category];
+                        } else {
+                            alert(`${category}ページはまだ実装されていません`);
+                        }
+                    }, 200);
+                });
+                
+                // ホバー時のサウンド効果（オプション）
+                card.addEventListener('mouseenter', function() {
+                    // this.style.filter = 'brightness(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    // this.style.filter = '';
+                });
+            });
+            
+            // パララックス効果（軽微）
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('body');
+                const speed = scrolled * 0.5;
+                
+                parallax.style.backgroundPosition = `center ${speed}px`;
+            });
+            
+            // キーボードナビゲーション
+            document.addEventListener('keydown', function(e) {
+                if (e.key >= '1' && e.key <= '7') {
+                    const index = parseInt(e.key) - 1;
+                    const cards = document.querySelectorAll('.category-card');
+                    if (cards[index]) {
+                        cards[index].click();
+                    }
+                }
+            });
+            
+            // ローディングアニメーションのトリガー
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.loading').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // ページ読み込み完了時のメッセージ
+        window.addEventListener('load', function() {
+            console.log('邯鄲世界データベースが読み込まれました');
+            console.log('キーボードの1-7キーでカテゴリに直接アクセスできます');
+        });
+    </script>
+</body>
+</html>
