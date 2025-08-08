@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特殊ルール - 邯鄲世界データベース</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --gold-color: #f4d03f;
+            --mystic-purple: #8e44ad;
+            --deep-blue: #2c3e50;
+            --divine-white: #ecf0f1;
+            --shadow-dark: #0f0f23;
+            --gradient-divine: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --gradient-cosmic: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        }
+        
+        body {
+            background: var(--gradient-divine);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(244, 208, 63, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(142, 68, 173, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(233, 69, 96, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255,255,255,0.1);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .hero-section {
+            background: var(--gradient-cosmic);
+            color: var(--divine-white);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30% 30%, rgba(244, 208, 63, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(142, 68, 173, 0.2) 0%, transparent 40%);
+            animation: mysticalGlow 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes mysticalGlow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.05); }
+        }
+        
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 20px rgba(244, 208, 63, 0.5),
+                2px 2px 4px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.1em;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+        
+        .overview-section {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.05), rgba(22, 33, 62, 0.1));
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 6px solid var(--gold-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .overview-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(244, 208, 63, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .overview-section h2 {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+        
+        .overview-section p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        
+        .rule-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.1),
+                0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rule-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-divine);
+        }
+        
+        .rule-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(244, 208, 63, 0.03) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .rule-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(244, 208, 63, 0.2);
+        }
+        
+        .rule-card:hover::after {
+            opacity: 1;
+        }
+        
+        .rule-card:nth-child(4n+1) { border-left: 5px solid var(--accent-color); }
+        .rule-card:nth-child(4n+2) { border-left: 5px solid var(--gold-color); }
+        .rule-card:nth-child(4n+3) { border-left: 5px solid var(--mystic-purple); }
+        .rule-card:nth-child(4n+4) { border-left: 5px solid var(--deep-blue); }
+        
+        .rule-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cost-badge {
+            background: linear-gradient(135deg, var(--accent-color), var(--mystic-purple));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+        
+        .rule-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #555;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .navbar {
+            background: var(--gradient-cosmic) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .section-divider {
+            height: 4px;
+            background: var(--gradient-divine);
+            border: none;
+            border-radius: 2px;
+            margin: 50px 0;
+            box-shadow: 0 0 20px rgba(244, 208, 63, 0.3);
+        }
+        
+        .section-title {
+            background: var(--gradient-cosmic);
+            color: var(--divine-white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .section-title h2 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px rgba(244, 208, 63, 0.5);
+        }
+        
+        .special-rule {
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.05), rgba(142, 68, 173, 0.05)) !important;
+            border: 2px solid var(--gold-color) !important;
+        }
+        
+        .special-rule .rule-title {
+            color: var(--gold-color);
+            text-shadow: 0 0 10px rgba(244, 208, 63, 0.3);
+        }
+        
+        .critical-rules ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .critical-rules li {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border-left: 4px solid var(--mystic-purple);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .critical-rules li::before {
+            content: '★';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--mystic-purple);
+            font-size: 1.5rem;
+            background: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .extended-skills-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .extended-skills-table table {
+            margin: 0;
+        }
+        
+        .extended-skills-table th {
+            background: var(--gradient-cosmic);
+            color: var(--divine-white);
+            padding: 20px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(244, 208, 63, 0.3);
+        }
+        
+        .extended-skills-table td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(244, 208, 63, 0.1);
+            vertical-align: top;
+        }
+        
+        .extended-skills-table tr:hover {
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.02), rgba(142, 68, 173, 0.02));
+        }
+        
+        .skill-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .rule-title {
+                font-size: 1.3rem;
+            }
+            
+            .overview-section {
+                padding: 25px;
+            }
+            
+            .rule-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-crown me-2"></i>
+                邯鄲世界データベース
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="main-container">
+            <!-- ヒーローセクション -->
+            <div class="hero-section">
+                <h1><i class="fas fa-dice-d20 me-3"></i>特殊ルール</h1>
+                <p class="subtitle">邯鄲世界における様々な特別なゲームルール</p>
+            </div>
+
+            <div class="p-4">
+                <!-- 概要セクション -->
+                <div class="overview-section">
+                    <h2><i class="fas fa-magic me-2"></i>特殊ルールについて</h2>
+                    <p>
+                        幸運を消費するルールが第七版で生まれました。<br>
+                        利用方法は多岐に渡るので随時ご確認ください。<br>
+                        他にもパルプルールなど多くのルールを活用してゲームを優位に進めよう。
+                    </p>
+                </div>
+
+                <hr class="section-divider">
+
+                <!-- 幸運ルール -->
+                <div class="section-title">
+                    <h2>
+                        <i class="fas fa-clover me-2"></i>幸運ルール一覧
+                    </h2>
+                </div>
+
+                <div class="row row-cols-1 row-cols-lg-2 g-4">
+                    <!-- ロールの結果を調整する -->
+                    <div class="col">
+                        <div class="rule-card">
+                            <h5 class="rule-title">ロールの結果を調整する</h5>
+                            <div class="cost-badge">コスト: X pt</div>
+                            <p class="rule-description">
+                                プレイヤーは技能ロールをした後に幸運を消費して結果を変えることが出来る。<br>
+                                技能ロールの結果に-Xの修正を与える。<br>
+                                Xは消費した幸運の値に等しい。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 武器のファンブルと火器故障の結果を無視する -->
+                    <div class="col">
+                        <div class="rule-card">
+                            <h5 class="rule-title">武器のファンブルと火器故障の結果を無視する</h5>
+                            <div class="cost-badge">コスト: 10 pt</div>
+                            <p class="rule-description">
+                                近接武器や火器の故障が起こった場合、<br>
+                                幸運10ptを消費してその結果をなかったことに出来る。<br>
+                                ただし失敗した事実は変わらない。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 正気度喪失を半分にする -->
+                    <div class="col">
+                        <div class="rule-card">
+                            <h5 class="rule-title">正気度喪失を半分にする</h5>
+                            <div class="cost-badge">コスト: X pt</div>
+                            <p class="rule-description">
+                                正気度ロールに失敗した時、正気度喪失を半分にする。<br>
+                                消費される幸運Xは元の正気度喪失の2倍に等しい。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 意識不明を免れる -->
+                    <div class="col">
+                        <div class="rule-card">
+                            <h5 class="rule-title">意識不明を免れる</h5>
+                            <div class="cost-badge">コスト: 1 pt（1Rごとに倍増）</div>
+                            <p class="rule-description">
+                                ヒーローが意識を保つためのCONロールに失敗した場合や自動的に意識不明になった場合は、<br>
+                                1幸運ポイントを消費してそのラウンドが終了するまで意識を保つことが出来る。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- こんなのかすり傷さ -->
+                    <div class="col">
+                        <div class="rule-card">
+                            <h5 class="rule-title">こんなのかすり傷さ</h5>
+                            <div class="cost-badge">コスト: 20 pt</div>
+                            <p class="rule-description">
+                                一見酷い負傷を負っているように見えても実はそうでもないことがある。<br>
+                                ダメージを受けた時、幸運ptを消費してそのキャラクターは即座に1D6点を回復する。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 確実な死を回避する -->
+                    <div class="col">
+                        <div class="rule-card special-rule">
+                            <h5 class="rule-title">確実な死を回避する</h5>
+                            <div class="cost-badge">コスト: 30 pt</div>
+                            <p class="rule-description">
+                                確実にキャラクターがロストする状況に際し30ptを消費することでそれを免れる。<br>
+                                キャラクターはただちに1D6+1点回復する。<br>
+                                必ずプレイヤーは（KPやその他PLと相談しても良い）どのようにしてその死を免れたか描写すること。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 追撃 -->
+                    <div class="col">
+                        <div class="rule-card">
+                            <h5 class="rule-title">追撃</h5>
+                            <div class="cost-badge">コスト: 10 pt</div>
+                            <p class="rule-description">
+                                近接戦の攻撃を追加でもう一回行える。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 華々しい最期 -->
+                    <div class="col">
+                        <div class="rule-card special-rule">
+                            <h5 class="rule-title">華々しい最期</h5>
+                            <div class="cost-badge">コスト: 0 pt</div>
+                            <p class="rule-description">
+                                死を避けることができない状況に直面した時、キャラクターは華々しい最期を迎えることが出来る。<br>
+                                キャラクターは死ぬ前にダイナミックで目を見張るようなドラマチックなアクションを一回実行する。<br>
+                                どんなことしてもいいよ権。なんでも好きに描写していいです。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="section-divider">
+
+                <!-- クリティカルルール -->
+                <div class="section-title">
+                    <h2>
+                        <i class="fas fa-star me-2"></i>クリティカルでの特殊なルール
+                    </h2>
+                </div>
+
+                <div class="rule-card critical-rules">
+                    <p class="rule-description mb-4">攻撃がクリティカルした場合、以下のルールを選択して適用しても良い：</p>
+                    <ul>
+                        <li>攻撃が命中した場合、相手は自動的に意識を失う</li>
+                        <li>攻撃が命中した時、全ての装甲を無視する。敵の弱点を見つけたのだ</li>
+                        <li>命中して最大のダメージを二倍したダメージを与える</li>
+                        <li>次のロールにボーナスダイスを一つ獲得する</li>
+                        <li>攻撃が命中した時、相手が動揺したり転倒したり急な斜面から落ちる。そうすることでさらにダメージを受けたり次のアクションを失う</li>
+                    </ul>
+                </div>
+
+                <hr class="section-divider">
+
+                <!-- 拡張技能 -->
+                <div class="section-title">
+                    <h2>
+                        <i class="fas fa-cogs me-2"></i>拡張技能
+                    </h2>
+                </div>
+
+                <div class="rule-card">
+                    <p class="rule-description mb-4">
+                        ここで上げる例は単なる一例である。<br>
+                        プレイヤーとKPで話し合い、合意の上でふさわしい拡張技能を行うと良いだろう。
+                    </p>
+                </div>
+
+                <div class="extended-skills-table">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>技能名</th>
+                                <th>効果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="skill-name">科学、機械修理、電気修理</td>
+                                <td>ウィアードサイエンスを作る能力を手に入れる</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">科学（天文学、地質学）</td>
+                                <td>ヒーローは星を読んで別のキャラクターの現在位置や行動をPLに聞くことが出来る</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">鑑定</td>
+                                <td>アイテムを扱ったり研究したりすれば、そのアイテムの来歴を見抜くことが出来る。いつどこでアイテムが作られたか、作成者は誰か、誰が所持していたか、なんのために作られたかなど</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">近接格闘</td>
+                                <td>同じ技能値を持つヒーローの分身がヒーローの脇で戦うことが出来る</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">芸術/製作</td>
+                                <td>見たものの感情に大きく影響を及ぼす。正気度を喪失したり回復したりできる。この芸術品が魔術的な効力を持つ場合もある</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">射撃</td>
+                                <td>自らの武器を進化させ曲がり角の先にいる相手を射撃したり遮蔽を無視して狙撃できるかもしれない</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">心理学</td>
+                                <td>心を読む能力か超能力に似た別の何かとして扱う</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">水泳</td>
+                                <td>水中で呼吸できるようになる</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">登攀</td>
+                                <td>滑らかな表面すら蜘蛛のように登攀できる</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">ナビゲート</td>
+                                <td>クトゥルフ神話にまつわる門などの奇妙な場所を突き止める</td>
+                            </tr>
+                            <tr>
+                                <td class="skill-name">変装</td>
+                                <td>例えばNPCの生活の中に巧みに潜び込んだりできる。対象はキャラクターを親戚か友人だと思い込み、ずっと自分の人生で関わってきた相手だと思う</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
