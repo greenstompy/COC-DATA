@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装甲データベース</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --armor-color: #3498db;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .armor-category {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+            margin: 30px 0;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .armor-category h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .armor-category h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        
+        .skill-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--armor-color);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table thead th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 15px 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(103, 126, 234, 0.1);
+            transform: translateY(-1px);
+            transition: all 0.3s ease;
+        }
+        
+        .table tbody td {
+            vertical-align: middle;
+            padding: 12px 10px;
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .armor-value-cell {
+            font-weight: bold;
+            color: var(--armor-color);
+        }
+        
+        .level-cell {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--primary-color);
+            margin: 0 5px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pills .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--armor-color);
+        }
+        
+        .armor-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--armor-color);
+        }
+        
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            
+            .armor-category h1 {
+                font-size: 1.5rem;
+            }
+            
+            .armor-category h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-shield-alt me-2"></i>
+                装甲データベース
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="main-container p-4">
+            <!-- ナビゲーション -->
+            <ul class="nav nav-pills nav-fill mb-4" id="armorTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#modern">
+                        <i class="fas fa-shield-virus armor-icon"></i>現代装甲
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#historical">
+                        <i class="fas fa-shield armor-icon"></i>歴史的装甲
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#improvised">
+                        <i class="fas fa-tools armor-icon"></i>即席装甲
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- 現代装甲タブ -->
+                <div class="tab-pane fade show active" id="modern">
+                    <div class="armor-category">
+                        <h1><i class="fas fa-shield-virus me-3"></i>現代装甲</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">体を守る防護点を持つ現代的な装甲。防具にはレベルがあり、運動技能へのマイナス補正がある場合があります。</p>
+                        </div>
+                        
+                        <h2>防弾装備</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>軽防弾ベスト</strong></td>
+                                            <td class="armor-value-cell">6</td>
+                                            <td class="level-cell">1</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>重防弾ベスト</strong></td>
+                                            <td class="armor-value-cell">8</td>
+                                            <td class="level-cell">2</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>軽ボディアーマー</strong></td>
+                                            <td class="armor-value-cell">10</td>
+                                            <td class="level-cell">3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>重ボディアーマー</strong></td>
+                                            <td class="armor-value-cell">12</td>
+                                            <td class="level-cell">4</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>軍用ボディアーマー</strong></td>
+                                            <td class="armor-value-cell">12</td>
+                                            <td class="level-cell">4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>ヘルメット</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>現代軍ヘルメット</strong></td>
+                                            <td class="armor-value-cell">5</td>
+                                            <td class="level-cell">1</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>厚いケプラー製のベスト</strong></td>
+                                            <td class="armor-value-cell">8</td>
+                                            <td class="level-cell">2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 歴史的装甲タブ -->
+                <div class="tab-pane fade" id="historical">
+                    <div class="armor-category">
+                        <h1><i class="fas fa-shield me-3"></i>歴史的装甲</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">古代から近世までの歴史的な装甲と防護具。</p>
+                        </div>
+                        
+                        <h2>日本の装甲</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>剣道防具</strong></td>
+                                            <td class="armor-value-cell">3</td>
+                                            <td class="level-cell">1</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>武者鎧+大兜</strong></td>
+                                            <td class="armor-value-cell">6</td>
+                                            <td class="level-cell">1</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>南蛮鎧+鉄兜</strong></td>
+                                            <td class="armor-value-cell">8</td>
+                                            <td class="level-cell">2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>日本の部分装甲</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>鉢金</strong></td>
+                                            <td class="armor-value-cell">1</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>大兜</strong></td>
+                                            <td class="armor-value-cell">2</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>鎖帷子</strong></td>
+                                            <td class="armor-value-cell">1</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>腹当て</strong></td>
+                                            <td class="armor-value-cell">2</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>すね当て</strong></td>
+                                            <td class="armor-value-cell">1</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>籠手</strong></td>
+                                            <td class="armor-value-cell">1</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>西洋の装甲</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>ww1型ヘルメット</strong></td>
+                                            <td class="armor-value-cell">2</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 即席装甲タブ -->
+                <div class="tab-pane fade" id="improvised">
+                    <div class="armor-category">
+                        <h1><i class="fas fa-tools me-3"></i>即席装甲</h1>
+                        <div class="skill-info">
+                            <p class="mb-0">緊急時に使用できる即席の防護材料。防弾ベストの類も刀剣に弱い場合があります。</p>
+                        </div>
+                        
+                        <h2>身近な防護材料</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>厚い皮のジャケット</strong></td>
+                                            <td class="armor-value-cell">1</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>陣傘</strong></td>
+                                            <td class="armor-value-cell">1</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>大きなサンドバック</strong></td>
+                                            <td class="armor-value-cell">20</td>
+                                            <td class="level-cell">7</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>建材・工業材料</h2>
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>名前</th>
+                                            <th>装甲値</th>
+                                            <th>レベル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>3cmの堅い木</strong></td>
+                                            <td class="armor-value-cell">3</td>
+                                            <td class="level-cell">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>4㎝の防弾ガラス</strong></td>
+                                            <td class="armor-value-cell">15</td>
+                                            <td class="level-cell">5</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>5㎝の鉄鋼版</strong></td>
+                                            <td class="armor-value-cell">19</td>
+                                            <td class="level-cell">7</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 装甲レベルの説明 -->
+            <div class="armor-category mt-4">
+                <h1><i class="fas fa-info-circle me-3"></i>装甲レベルについて</h1>
+                <div class="skill-info">
+                    <p class="mb-3"><strong>装甲レベル</strong>は装備の重量や動きにくさを表します。</p>
+                    <p class="mb-0">レベルが高いほど、運動技能にマイナス補正がかかる場合があります（ルールによって異なります）。また、防弾ベストの類は刀剣による攻撃に対して効果が低い場合があります。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
