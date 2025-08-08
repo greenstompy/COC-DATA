@@ -203,7 +203,7 @@
 
             <!-- 防具 -->
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card loading ripple" data-category="aromor" style="animation-delay: 0.3s">
+                <div class="card category-card loading ripple" data-category="armor" style="animation-delay: 0.3s">
                     <div class="card-body text-center p-4">
                         <i class="fas fa-shield-alt card-icon armor"></i>
                         <h3 class="card-title">防具</h3>
@@ -302,15 +302,15 @@
                     
                     // 実際のページ遷移
                     setTimeout(() => {
-                        // 実際の邯鄲世界データベースページへリンク
+                        // 修正されたリンクマッピング
                         const pageMap = {
                             'melee_combat': 'melee_combat.html',
                             'range_combat': 'range_combat.html', 
-                            'aromor': 'aromor.html',
+                            'armor': 'armor.html',
                             'hadan': 'hadan.html',
-                            'kyudan': 'kyudan_page.html',
-                            'tsuidan': 'tsuidan_page.html',
-                            'ideology': 'ideology_bs5 (1).html'
+                            'kyudan': 'kyudan.html',
+                            'tsuidan': 'tsuidan.html',
+                            'ideology': 'ideology.html'
                         };
                         
                         if (pageMap[category]) {
